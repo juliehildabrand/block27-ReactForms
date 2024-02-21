@@ -1,9 +1,9 @@
 import { useState } from "react"
 
-export default function Authenticate({token}) {
+export default function Authenticate({token, setUsername}) {
 
-  const [successMessage, setSuccessMessage] = useState(null)
-  const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(false)
+  const [error, setError] = useState("");
 
   async function handleClick() {
     try {
@@ -15,20 +15,20 @@ export default function Authenticate({token}) {
           Authorization: `Bearer ${token}`
         }
       }
-    )
+    );
       const result = await response.json()
       setSuccessMessage(result.success)
     } catch (error) {
-      setError(error.message)
+      setError(error);
     }
+    console.log(token)
+  }
 
-return (
-  <>
-  <h2>Authenticate</h2>
-  {successMessage && <p>{successMessage}</p>}
-  {error && <p>{error}</p>}
-  <button onClick={handleClick}>Authenticate Token</button>
-  </>
-  )
-}
+    return (
+      <>
+        <button onClick={handleClick}>Authenticate Token</button>
+        {successMessage && <p>Successfully Authenticated! Welcome Token Number:  {token}</p>}
+        {error && <p>Please input Username and Password and Submit first</p>}
+      </>
+      )
 }

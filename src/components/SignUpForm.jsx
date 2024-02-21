@@ -27,7 +27,7 @@ async function handleSubmit(event) {
 }}
   return (
   <>
-    <h2>Sign Up</h2>
+    <h2>New here? Sign Up!</h2>
 
     {error && <p>{error}</p>}
 
@@ -38,8 +38,11 @@ async function handleSubmit(event) {
       <br/>
       <br/>
       <label>
-        Password: <input value={password} onChange={(e) => setPassword(e.target.value)}/>
+        Password: <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
       </label>
+      {username.length > 10
+      ? <p>Username must be less than 10 characters</p>
+      : null}
       <br/>
       <br/>
       <button>Submit</button>
